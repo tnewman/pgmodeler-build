@@ -20,10 +20,12 @@ jobs:
       - name: Checkout pgModeler
         run: |
           git clone --single-branch --branch master https://github.com/pgmodeler/pgmodeler.git
+          rm -rf pgmodeler/.git
 
       - name: Checkout pgModeler Plugins
         run: |
           git clone --single-branch --branch master https://github.com/pgmodeler/plugins.git
+          rm -rf plugins/.git
 
       - name: Move Plugins to pgModeler Directory
         run: |
