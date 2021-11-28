@@ -50,10 +50,11 @@ jobs:
           make install
           cd ..
           cp -R pgmodeler/conf AppDir
+          cp -R pgmodeler/schemas AppDir
 
       - name: Archive Binaries
         run: |
-          tar -czvf pgmodeler-bin-x86_64.tar.gz AppDir
+          tar -czvf pgmodeler-bin-x86_64.tar.gz --transform s/AppDir/pgmodeler-bin/ AppDir
 
       - name: Upload Binary Archive
         uses: actions/upload-artifact@v2
