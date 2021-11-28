@@ -7,8 +7,13 @@ on:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y qtbase5-dev qttools5-dev libqt5svg5-dev libpq-dev libxml2-dev
+
       - name: Checkout Release Scripts
         uses: actions/checkout@v2
 
@@ -27,3 +32,12 @@ jobs:
       - name: Archive Source
         run: |
           tar -czvf pgmodeler-source.tar.gz pgmodeler
+      
+      - name: Build
+        run: |
+          export INSTALLATION_ROOT=$(pwd)/build
+          cd pgmodeler
+          qmake -r CONFIG+=release PREFIX=$INSTALLATION_ROOT BINDIR=$INSTALLATION_ROOT \
+            PRIVATEBINDIR=$INSTALLATION_ROOT PRIVATELIBDIR=$INSTALLATION_ROOT/lib pgmodeler.pro
+          make -j$(nproc)
+          make install
