@@ -47,7 +47,9 @@ jobs:
           export INSTALLATION_ROOT=$(pwd)/AppDir
           cd pgmodeler
           qmake -r CONFIG+=release PREFIX=$INSTALLATION_ROOT BINDIR=$INSTALLATION_ROOT \
-            PRIVATEBINDIR=$INSTALLATION_ROOT PRIVATELIBDIR=$INSTALLATION_ROOT/lib pgmodeler.pro
+            PRIVATEBINDIR=$INSTALLATION_ROOT PRIVATELIBDIR=$INSTALLATION_ROOT/lib \
+            NO_UPDATE_CHECK=true \
+            pgmodeler.pro
           make -j$(nproc)
           make install
           cd ..
