@@ -61,3 +61,12 @@ jobs:
         with:
           name: pgmodeler-bin-x86_64.tar.gz
           path: pgmodeler-bin-x86_64.tar.gz
+
+      - name: Publish GitHub Release
+        uses: marvinpinto/action-automatic-releases@latest
+        if: ${{ !env.ACT }}
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            pgmodeler-bin-x86_64.tar.gz
+            pgmodeler-source.tar.gz
