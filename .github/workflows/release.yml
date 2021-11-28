@@ -70,6 +70,7 @@ jobs:
         if: ${{ !env.ACT }}
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest
           files: |
             pgmodeler-bin-x86_64.tar.gz
             pgmodeler-source.tar.gz
