@@ -49,14 +49,15 @@ jobs:
           make -j$(nproc)
           make install
           cd ..
+          cp -R pgmodeler/conf AppDir
 
       - name: Archive Binaries
         run: |
-          tar -czvf pg-modeler-bin-x86_64.tar.gz AppDir
+          tar -czvf pgmodeler-bin-x86_64.tar.gz AppDir
 
       - name: Upload Binary Archive
         uses: actions/upload-artifact@v2
         if: ${{ !env.ACT }}
         with:
-          name: pg-modeler-bin-x86_64.tar.gz
-          path: pg-modeler-bin-x86_64.tar.gz
+          name: pgmodeler-bin-x86_64.tar.gz
+          path: pgmodeler-bin-x86_64.tar.gz
