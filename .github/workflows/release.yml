@@ -32,7 +32,14 @@ jobs:
       - name: Archive Source
         run: |
           tar -czvf pgmodeler-source.tar.gz pgmodeler
-      
+
+      - name: Upload Source Archive
+        uses: actions/upload-artifact@v2
+        if: ${{ !env.ACT }}
+        with:
+          name: pgmodeler-source.tar.gz
+          path: pgmodeler-source.tar.gz
+
       - name: Build
         run: |
           export INSTALLATION_ROOT=$(pwd)/AppDir
@@ -41,3 +48,14 @@ jobs:
             PRIVATEBINDIR=$INSTALLATION_ROOT PRIVATELIBDIR=$INSTALLATION_ROOT/lib pgmodeler.pro
           make -j$(nproc)
           make install
+
+      - name: Archive Binaries
+        run: |
+          tar -czvf pg-modeler-x86_64.tar.gz AppDir
+
+      - name: Upload Binary Archive
+        uses: actions/upload-artifact@v2
+        if: ${{ !env.ACT }}
+        with:
+          name: pgmodeler-x86_64.tar.gz
+          path: pgmodeler-x86_64.tar.gz
