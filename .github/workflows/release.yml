@@ -1,0 +1,29 @@
+
+name: Release
+
+on:
+  - push
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Release Scripts
+        uses: actions/checkout@v2
+
+      - name: Checkout pgModeler
+        run: |
+          git clone --single-branch --branch master https://github.com/pgmodeler/pgmodeler.git
+
+      - name: Checkout pgModeler Plugins
+        run: |
+          git clone --single-branch --branch master https://github.com/pgmodeler/plugins.git
+
+      - name: Move Plugins to pgModeler Directory
+        run: |
+          mv plugins pgmodeler
+      
+      - name: Archive Source
+        run: |
+          tar -czvf pgmodeler-source.tar.gz pgmodeler
