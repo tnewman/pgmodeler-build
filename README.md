@@ -1,2 +1,2 @@
-# pgmodeler-build
+# pgmodeler-release
 Pre-Built pgModeler Binaries
