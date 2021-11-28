@@ -28,17 +28,13 @@ jobs:
       - name: Move Plugins to pgModeler Directory
         run: |
           mv plugins pgmodeler
-      
-      - name: Archive Source
-        run: |
-          tar -czvf pgmodeler-source.tar.gz pgmodeler
 
       - name: Upload Source Archive
         uses: actions/upload-artifact@v2
         if: ${{ !env.ACT }}
         with:
-          name: pgmodeler-source.tar.gz
-          path: pgmodeler-source.tar.gz
+          name: pgmodeler-source
+          path: pgmodeler
 
       - name: Build
         run: |
@@ -48,14 +44,11 @@ jobs:
             PRIVATEBINDIR=$INSTALLATION_ROOT PRIVATELIBDIR=$INSTALLATION_ROOT/lib pgmodeler.pro
           make -j$(nproc)
           make install
-
-      - name: Archive Binaries
-        run: |
-          tar -czvf pg-modeler-x86_64.tar.gz AppDir
+          cd ..
 
       - name: Upload Binary Archive
         uses: actions/upload-artifact@v2
         if: ${{ !env.ACT }}
         with:
-          name: pgmodeler-x86_64.tar.gz
-          path: pgmodeler-x86_64.tar.gz
+          name: pg-modeler-bin-x86_64
+          path: AppDir
