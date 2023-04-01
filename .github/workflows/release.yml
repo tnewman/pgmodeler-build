@@ -12,10 +12,10 @@ jobs:
     name: Release
     runs-on: ubuntu-18.04
     steps:
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends -y qt5-default qtbase5-dev qttools5-dev libqt5svg5-dev libpq-dev libxml2-dev
+      - name: Install QT
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '6.*'
 
       - name: Checkout Release Scripts
         uses: actions/checkout@v2
