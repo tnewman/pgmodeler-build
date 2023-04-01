@@ -10,15 +10,12 @@ on:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - name: Install QT
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: '6.*'
-
-      - name: Checkout Release Scripts
-        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y qt6-default qtbase6-dev qttools6-dev libqt6svg6-dev libpq-dev libxml2-dev
 
       - name: Checkout pgModeler
         run: |
