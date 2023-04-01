@@ -15,7 +15,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y qt6-base-dev qt6-tools-dev libqt6svg6-dev libqt6opengl6 libpq-dev libxml2-dev
+          sudo apt-get install --no-install-recommends -y qt6-base-dev qt6-tools-dev libqt6svg6-dev libqt6opengl6-dev libpq-dev libxml2-dev
       
       - name: Configure QT6
         run: |
