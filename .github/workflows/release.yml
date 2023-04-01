@@ -15,8 +15,16 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y qt6-base qt6-base-dev libpq-dev libxml2-dev
-
+          sudo apt-get install --no-install-recommends -y qt6-base-dev libpq-dev libxml2-dev
+      
+      - name: Configure QT6
+        run: |
+          # Fixes bug with QT chooser: https://askubuntu.com/a/1460243
+          qtchooser -install qt6 $(which qmake6)
+          sudo mv ~/.config/qtchooser/qt6.conf /usr/share/qtchooser/qt6.conf
+          sudo mkdir -p /usr/lib/$(uname -p)-linux-gnu/qt-default/qtchooser
+          sudo ln -n /usr/share/qtchooser/qt6.conf /usr/lib/$(uname -p)-linux-gnu/qt-default/qtchooser/default.conf
+      
       - name: Checkout pgModeler
         run: |
           git clone --single-branch --branch main https://github.com/pgmodeler/pgmodeler.git
