@@ -15,7 +15,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y qt6-base-dev libpq-dev libxml2-dev
+          sudo apt-get install --no-install-recommends -y qt6-base qt6-base-dev libpq-dev libxml2-dev
 
       - name: Checkout pgModeler
         run: |
